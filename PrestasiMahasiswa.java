@@ -19,9 +19,16 @@ public class PrestasiMahasiswa {
             
             if (pilihan == 1) {
                 tambahPrestasi();
-            }  else {
-                System.out.println("Pilihan tidak valid. Coba lagi.");
+            } else if (pilihan == 2) {
+                tampilkanPrestasi();
+            } else if (pilihan == 3) {
+                analisisPrestasi();
+            } else if (pilihan == 4) {
+                System.out.println();
+                System.out.println("Keluar dari program.");
                 break;
+            } else {
+                System.out.println("Pilihan tidak valid. Coba lagi.");
             }
         }
     }
@@ -68,5 +75,44 @@ public class PrestasiMahasiswa {
         jumlahData++;
 
         System.out.println("Prestasi berhasil ditambahkan.");
+    }
+
+    static void tampilkanPrestasi() {
+        if (jumlahData == 0) {
+            System.out.println("Belum ada data prestasi.");
+        } else {
+            System.out.println("\n===== Daftar Prestasi =====");
+            for (int i = 0; i < jumlahData; i++) {
+                System.out.println((i+1) + ". | Nama: " + prestasi[i][0] +
+                                   " | NIM: " + prestasi[i][1] +
+                                   " | Jenis: " + prestasi[i][2] +
+                                   " | Tingkat: " + prestasi[i][3] +
+                                   " | Tahun: " + prestasi[i][4]);
+            }
+        }
+    }
+
+    static void analisisPrestasi() {
+        if (jumlahData == 0) {
+            System.out.println("Belum ada data prestasi untuk dianalisis.");
+        } else {
+            System.out.print("Masukkan jenis prestasi untuk analisis: ");
+            String jenisPrestasi = sc.nextLine();
+            boolean search = false;
+    
+            System.out.println("\n===== Hasil Analisis =====");
+            for (int i = 0; i < jumlahData; i++) {
+                if (prestasi[i][2].equalsIgnoreCase(jenisPrestasi)) {
+                    System.out.println((i+1) + ". | Nama: " + prestasi[i][0] +
+                                       "| NIM: " + prestasi[i][1] +
+                                       "| Tingkat: " + prestasi[i][3] +
+                                       "| Tahun: " + prestasi[i][4]);
+                    search = true;
+                }
+            }
+            if (!search) {
+                System.out.println("Tidak ada prestasi dengan jenis \"" + jenisPrestasi + "\".");
+            }
+        }
     }
 }
