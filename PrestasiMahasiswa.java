@@ -7,7 +7,9 @@ public class PrestasiMahasiswa {
 
     public static void main(String[] args) {
         while (true) {
-            System.out.println("\n===== MENU UTAMA =====");
+            System.out.println("\n======================");
+            System.out.println("      MENU UTAMA      ");
+            System.out.println("======================");
             System.out.println("1. Tambah Prestasi");
             System.out.println("2. Tampilkan Prestasi");
             System.out.println("3. Analisis Prestasi");
@@ -16,6 +18,7 @@ public class PrestasiMahasiswa {
             System.out.print("Pilih menu : ");
             int pilihan = sc.nextInt();
             sc.nextLine(); 
+            System.out.println();
             
             if (pilihan == 1) {
                 tambahPrestasi();
@@ -37,10 +40,22 @@ public class PrestasiMahasiswa {
 
         String nama, nim, jenisPrestasi, tingkatPrestasi, tahunPrestasi;
 
+        System.out.println("====================================");
+        System.out.println("        TAMBAH DATA PRESTASI        ");
+        System.out.println("====================================");
+        System.out.println();
         System.out.print("Masukkan Nama Mahasiswa: ");
         nama = sc.nextLine();
-        System.out.print("Masukkan NIM Mahasiswa: ");
-        nim = sc.nextLine();
+        while (true) {
+            System.out.print("Masukkan NIM Mahasiswa: ");
+            nim = sc.nextLine();
+
+            if (nim.length() == 12) {
+                break;
+            } else {
+                System.out.println("NIM harus 12 digit! Coba lagi.");
+            }
+        }
         System.out.print("Masukkan Jenis Prestasi: ");
         jenisPrestasi = sc.nextLine();
         
@@ -78,10 +93,13 @@ public class PrestasiMahasiswa {
     }
 
     static void tampilkanPrestasi() {
+        System.out.println("======================================================================================");
+        System.out.println("                                     DATA PRESTASI                                    ");
+        System.out.println("======================================================================================");
+        System.out.println();
         if (jumlahData == 0) {
-            System.out.println("Belum ada data prestasi.");
+            System.out.println("Data Prestasi kosong.");
         } else {
-            System.out.println("\n===== Daftar Prestasi =====");
             for (int i = 0; i < jumlahData; i++) {
                 System.out.println((i+1) + ". | Nama: " + prestasi[i][0] +
                                    " | NIM: " + prestasi[i][1] +
@@ -93,20 +111,25 @@ public class PrestasiMahasiswa {
     }
 
     static void analisisPrestasi() {
+        System.out.println("======================================================================================");
+        System.out.println("                                 ANALISIS PRESTASI                                    ");
+        System.out.println("======================================================================================");
         if (jumlahData == 0) {
-            System.out.println("Belum ada data prestasi untuk dianalisis.");
+            System.out.println("Data Prestasi Kosong.");
         } else {
-            System.out.print("Masukkan jenis prestasi untuk analisis: ");
+            System.out.println();
+            System.out.print("Masukkan jenis prestasi untuk dianalisis: ");
             String jenisPrestasi = sc.nextLine();
             boolean search = false;
-    
-            System.out.println("\n===== Hasil Analisis =====");
+
             for (int i = 0; i < jumlahData; i++) {
                 if (prestasi[i][2].equalsIgnoreCase(jenisPrestasi)) {
+                    System.out.println("Keyword : " +jenisPrestasi);
+                    System.out.println();
                     System.out.println((i+1) + ". | Nama: " + prestasi[i][0] +
-                                       "| NIM: " + prestasi[i][1] +
-                                       "| Tingkat: " + prestasi[i][3] +
-                                       "| Tahun: " + prestasi[i][4]);
+                                       " | NIM: " + prestasi[i][1] +
+                                       " | Tingkat: " + prestasi[i][3] +
+                                       " | Tahun: " + prestasi[i][4]);
                     search = true;
                 }
             }
